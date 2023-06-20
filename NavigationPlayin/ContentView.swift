@@ -6,19 +6,16 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ContentView: View {
+    @ObservedObject var user = User.current
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if user.isLoggedIn {
+            HomeView()
+        } else {
+            LoginView(loggedIn: $user.isLoggedIn)
         }
-        .padding()
     }
-}
-
-#Preview {
-    ContentView()
 }
